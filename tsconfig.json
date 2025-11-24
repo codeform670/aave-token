@@ -1,20 +1,41 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "strict": true,
-      "esModuleInterop": true,
-      "outDir": "dist",
-      "resolveJsonModule": true,
-      "downlevelIteration": true
-    },
-    "include": ["./**/*"],
-    "files": [
-      "./buidler.config.ts",
-      "node_modules/@nomiclabs/buidler-ethers/src/type-extensions.d.ts",
-      "node_modules/buidler-typechain/src/type-extensions.d.ts",
-      "node_modules/@nomiclabs/buidler-waffle/src/type-extensions.d.ts",
-      "node_modules/@nomiclabs/buidler-etherscan/src/type-extensions.d.ts"
-    ]
-  }
+  "compilerOptions": {
+    /* --- Modernization & Strictness --- */
+    // Targets a modern ES version (Node.js 14+ supports ES2020/2022).
+    // This reduces transpilation overhead compared to 'es5'.
+    "target": "es2020", 
+    "module": "commonjs",
+    "strict": true,
+    
+    /* --- Interop and Resolution --- */
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    // When targeting modern Node, 'downlevelIteration' is often unnecessary, 
+    // but kept for safety if older features are used.
+    "downlevelIteration": true, 
+    
+    /* --- Output --- */
+    "outDir": "dist",
+    
+    /* --- Hardhat Type Helpers --- */
+    // Ensure all type definitions are available for the Hardhat environment
+    "forceConsistentCasingInFileNames": true
+  },
   
+  // Include all source and configuration files recursively
+  "include": [
+    "./**/*"
+  ],
+  
+  // Explicitly list critical files and type extensions if they aren't automatically included by Hardhat's setup.
+  // Note: Hardhat usually handles these automatically via environment setup.
+  "files": [
+    "./hardhat.config.ts", // Updated config file name
+    // The need to manually list these Node modules is often eliminated in modern Hardhat setups.
+    // Listing them here is kept as a robust fallback after renaming 'buidler' to 'hardhat'.
+    "node_modules/@nomiclabs/hardhat-ethers/src/type-extensions.d.ts",
+    "node_modules/hardhat-typechain/src/type-extensions.d.ts",
+    "node_modules/@nomiclabs/hardhat-waffle/src/type-extensions.d.ts",
+    "node_modules/@nomiclabs/hardhat-etherscan/src/type-extensions.d.ts"
+  ]
+}
